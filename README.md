@@ -1,8 +1,7 @@
-# EventLoop Backend
+# EventLoop Testbed
 
 ## Running Locally
 
-`nodemon --trace-warnings server.js`
-
+`nodemon --trace-warnings backend/server.js`
 
 
