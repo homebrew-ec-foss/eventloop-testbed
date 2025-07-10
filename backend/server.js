@@ -1,6 +1,7 @@
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import routes from './routes/index.js';
 
 dotenv.config();
 
@@ -8,9 +9,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-PORT = process.env.PORT ? process.env.PORT : 8000;
+const PORT = process.env.PORT ? process.env.PORT : 8000;
 
-app.use('/api/organiser', require('./routes/organiser'));
+app.use('/api', routes);
 
 app.listen(PORT, () => {
   console.log(`Backend running on http://localhost:${PORT}`);

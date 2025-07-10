@@ -34,6 +34,7 @@ CREATE TABLE participants (
   name TEXT NOT NULL CHECK(LENGTH(name) <= 128),
   email TEXT NOT NULL CHECK(LENGTH(email) <= 256),
   phone TEXT NOT NULL CHECK(LENGTH(phone) = 10 AND phone GLOB '[0-9]*'),
+  college TEXT NOT NULL CHECK(LENGTH(college) <= 256),
   srn TEXT CHECK(LENGTH(srn) <= 32),
   branch TEXT CHECK(LENGTH(branch) <= 2),
   day_scholar BOOLEAN,
