@@ -29,3 +29,7 @@ To avoid this, one must wrap the statements into a function and export it using 
 
 ## Day 5 - 11th July
 - Fix: syntactical error and circular reference between `events` and `teams` table.
+
+- Auto-initalisation of db was not working due to some file restructuring. Tested and fixed it.
+
+- Earlier, unnecessary passing of `db` object was required to perform CRUD operations. The new implementation fixes it by declaring the `db` object directly where it's required (i.e, `utils/execute.js`).
