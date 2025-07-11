@@ -27,4 +27,5 @@ To avoid this, one must wrap the statements into a function and export it using 
 
 - Corrected `emailRegex` as it was earlier allowing illegal email formats.
 
-- TODO: Escape and validate all illegal characters in any form data.
+## Day 5 - 11th July
+- Fix: syntactical error and circular reference between `events` and `teams` table.

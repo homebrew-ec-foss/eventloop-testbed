@@ -13,16 +13,14 @@ CREATE TABLE organisers (
 CREATE TABLE events (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL CHECK(LENGTH(name) <= 128),
-  team_id INTEGER NOT NULL,
   date DATETIME NOT NULL,
-  FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE CASCADE
 );
 
 CREATE TABLE teams (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   event_id INTEGER NOT NULL,
   name TEXT NOT NULL CHECK(LENGTH(name) <= 128), 
-  lead_name TEXT NOT NULL CHECK(LENGTH(lead_name <= 128)),
+  lead_name TEXT NOT NULL CHECK(LENGTH(lead_name) <= 128)),
   lead_email TEXT CHECK(LENGTH(lead_email) <= 256),
   num_participants INTEGER CHECK(num_participants <= 10),
   FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE
