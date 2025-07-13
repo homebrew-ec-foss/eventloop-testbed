@@ -1,13 +1,8 @@
-CREATE TABLE admins (
+CREATE TABLE dbAuthorisedUsers (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL CHECK(LENGTH(name) <= 128),
-  email TEXT NOT NULL UNIQUE CHECK(LENGTH(email) <= 256)
-);
-
-CREATE TABLE organisers (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL CHECK(LENGTH(name) <= 128),
-  email TEXT NOT NULL UNIQUE CHECK(LENGTH(email) <= 256)
+  email TEXT NOT NULL UNIQUE CHECK(LENGTH(email) <= 256),
+  role TEXT NOT NULL CHECK(role IN ('admin', 'organiser', 'volunteer'))
 );
 
 CREATE TABLE events (
@@ -35,8 +30,9 @@ CREATE TABLE participants (
   college TEXT NOT NULL CHECK(LENGTH(college) <= 256),
   srn TEXT NOT NULL CHECK(LENGTH(srn) <= 32),
   branch TEXT NOT NULL CHECK(LENGTH(branch) <= 4),
-  day_scholar INTEGER NOT NULL CHECK(day_scholar IN (0, 1)),
+  day_scholar INTEGER NOT NULL CHECK(day_scholar IN (0, 1)), --- bool value
   hostel TEXT CHECK(LENGTH(hostel) <= 8),
+  shortlisted INTEGER NOT NULL CHECK(shortlisted IN (0, 1)), -- bool value
   qr_string TEXT NOT NULL UNIQUE,
   FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE CASCADE
 );
