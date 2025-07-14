@@ -17,7 +17,7 @@ const selectFromTable = async (table, fields, values, conditions = []) => {
 
   if (conditions.length > 0) {
     fields.forEach((field, index) => {
-        const operator = conditions[index]?.operator || 'AND';
+        const operator = conditions[index]?.operator || ' AND ';
 
         if (operator === 'OR' && index == 0) sqlClause += `(${field} = ?) `;
         else sqlClause += `${field} = ? `;
@@ -29,7 +29,7 @@ const selectFromTable = async (table, fields, values, conditions = []) => {
     sqlClause = `${fields[0]} = ?`;
   }
 
-  const sql = `SELECT * FROM ${table} WHERE ${sqlClause}`; // intentionally have placeholders in the query, only `execute()` can handle the values
+  const sql = `SELECT * FROM ${table} WHERE ${sqlClause}`;
 
   return execute(sql, values, true);
 };

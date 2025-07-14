@@ -1,7 +1,7 @@
-import execute from "./execute.js";
+import execute from './execute.js';
 
 /**
- * Generic record insert function
+ * Generic 'INSERT' function
  * @param {string} table - table name
  * @param {string[]} fields - array of column names
  * @param {any[]} values - array of values (must match fields length)

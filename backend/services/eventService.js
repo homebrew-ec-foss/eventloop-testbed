@@ -18,6 +18,13 @@ export async function addEvent(name, date) {
   }
 }
 
+/**
+ * 
+ * @param {integer} id 
+ * @param {string} name 
+ * @param {} date 
+ * @returns 
+ */
 export async function editEvent(id, name, date) {
   try {
     await updateIntoTable('events', ['name', 'date'], [name, date], id);

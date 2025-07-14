@@ -4,7 +4,7 @@ import promptAdminCreation from './execute.js';
 async function checkAdminRecords() {
     let result = await selectFromTable('dbAuthorisedUsers', ['role'], ['admin']);
 
-    if(!result) {
+    if(!result || result.length == 0) {
         console.log('No admin found in the db.');
         await promptAdminCreation();
     }

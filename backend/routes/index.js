@@ -1,9 +1,13 @@
 import express from 'express';
 import organiser from './organiser.js';
 import event from './event.js';
+import login from './login.js';
+import refresh from './refresh.js';
 
 const router = express.Router();
 
+router.use('/login', login);
+router.use('/refresh', refresh)
 router.use('/organisers', organiser);
 router.use('/events', event);
 // router.use('/teams', require('./team'));

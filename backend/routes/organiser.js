@@ -1,10 +1,10 @@
 import express from 'express';
-import validateOrganiser from '../middleware/validateOrganiser.js';
+import validateUserDetails from '../middleware/validateUserDetails.js';
 import { addOrganiser } from '../services/organiserService.js';
 
 const router = express.Router();
 
-router.post('/add', validateOrganiser, async (req, res) => {
+router.post('/add', validateUserDetails, async (req, res) => {
   const { name, email } = req.validated;
 
   try {

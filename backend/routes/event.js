@@ -1,6 +1,6 @@
 import express from 'express';
-import validateEvent from "../middleware/validateEvent.js";
-import { addEvent, editEvent } from "../services/eventService.js";
+import validateEvent from '../middleware/validateEvent.js';
+import { addEvent, editEvent } from '../services/eventService.js';
 
 const router = express.Router();
 

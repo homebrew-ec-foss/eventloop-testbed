@@ -1,6 +1,9 @@
-export default function validateOrganiser(req, res, next) {
+import selectFromTable from "../db/utils/select.js";
+
+export default async function validateUserDetails(req, res, next) {
     const name = req.body?.name?.trim();
     const email = req.body?.email?.trim();
+    const role = req.body?.role?.trim();
 
     if (!name || !email) return res.status(400).json({ error: 'Missing fields' });
 
@@ -13,6 +16,9 @@ export default function validateOrganiser(req, res, next) {
     if (!nameRegex.test(name)) return res.status(400).json({ error: 'Illegal characters in name.' });
     if (!emailRegex.test(email)) return res.status(400).json({ error: 'Invalid email format.' });
 
-    req.validated = { name, email };
+    const userExists = await exists(name, email, role);
+    console.log(userExists);
+
+    req.validated = { name, email, userExists };
     next();
 }

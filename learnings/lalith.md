@@ -44,3 +44,6 @@ To avoid this, one must wrap the statements into a function and export it using 
 - feat: automatic prompting for admin creation if one doesn't already exist
 
 - refactor: used the previous implementation of grouping all non-participants into single table
+
+## Day 8 - 14th July
+- feat: integrate Google OAuth for sign-in
