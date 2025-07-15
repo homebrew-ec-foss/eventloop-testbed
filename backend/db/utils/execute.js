@@ -42,7 +42,7 @@ function promptInput(question) {
   });
 }
 
-async function promptAdminCreation() {
+export async function promptAdminCreation() {
     const name = await promptInput('Enter the name: ') || 'admin';
     let email = await promptInput('Enter the email: ');
 
@@ -54,11 +54,11 @@ async function promptAdminCreation() {
     const role = 'admin';
 
     try {
-      insertIntoTable('dbAuthorisedUsers', ['name', 'email', 'role'], [name, email, role]);
-      console.log('admin created with name: ', name); 
+      await insertIntoTable('dbAuthorisedUsers', ['name', 'email', 'role'], [name, email, role]);
+      return console.log('admin created with name: ', name); 
     }
     catch (err) {
-      console.error('error when creating admin: ', err);
+      return console.error('error when creating admin: ', err);
     }
 }
 
