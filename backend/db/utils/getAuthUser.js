@@ -1,9 +1,9 @@
-import selectFromTable from "./select.js";
+import { supabase } from "../../server.js";
 
-export async function getAuthUser(name, email) {
+export async function getAuthUser(email) {
     try {
-        const result = await selectFromTable('dbAuthorisedUsers', ['name', 'email'], [name, email], ['OR']);
-        if (result) return { success: true, name, email, role: result[0].role};
+        const { data, error } = await supabase.from('dbAuthorisedUsers').select('*').eq('email', email)
+        if (data) return { success: true, name: data[0].name, email, role: data[0].role};
         else return false;
     }
     catch (err) {
