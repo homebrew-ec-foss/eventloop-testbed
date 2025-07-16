@@ -47,3 +47,19 @@ To avoid this, one must wrap the statements into a function and export it using 
 
 ## Day 8 - 14th July
 - feat: integrate Google OAuth for sign-in
+
+## Day 9 - 15th July
+- tested different deployment options
+
+- read up on the limits of various deployment platforms
+
+## Day 10 - 16th July
+- feat: migrated `dbAuthorisedUsers` table to Supabase
+
+- feat: updated `insert.js` and `getAuthUser.js` to be compatible with Supabase
+
+- feat: updated `organiser` route to be compatible with Supabase
+
+- refactor: purged code that is no longer relevant due to database migration
+
+- purged unused packages from `package.json`
