@@ -24,9 +24,9 @@ router.post('', async (req, res) => {
         const user = await verifyToken(credentials); // verify jwt token
 
         const { email, name, sub } = user;
-        let result = await getAuthUser(name, email); // gets matching record from db
+        let result = await getAuthUser(email); // gets matching record from db
 
-        if(!result || result.length === 0) return res.status(403).json({ error: '403 forbidden' });
+        if(!result) return res.status(403).json({ error: '403 forbidden' });
         
         const userData = {
             name: result.name,

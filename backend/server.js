@@ -1,8 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import routes from './routes/index.js';
-import checkAdminRecords from './db/utils/checkAdminRecords.js';
 import cookieParser from "cookie-parser";
+import { createClient } from '@supabase/supabase-js'
+
+export const supabase = createClient(process.env.SUPABASE_ENDPOINT, process.env.SUPABASE_ANON_API_KEY);
 
 const app = express();
 app.use(express.json());
@@ -13,8 +15,6 @@ app.use(cors({
 }));
 
 app.use(cookieParser());
-
-checkAdminRecords();
 
 const PORT = process.env.PORT;
 

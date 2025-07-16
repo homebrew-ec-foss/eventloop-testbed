@@ -8,7 +8,7 @@ import execute from './execute.js';
  * @param {any} id - unique non-editable identifier
  */
 
-const updateIntoTable = async (table, fields, values, id) => {
+const updateRecord = async (table, fields, values, id) => {
   if (fields.length !== values.length) {
     throw new Error("Number of columns do not match number of values provided.");
   }
@@ -19,4 +19,4 @@ const updateIntoTable = async (table, fields, values, id) => {
   return execute(sql, [...values, id]);
 };
 
-export default updateIntoTable;
+export default updateRecord;

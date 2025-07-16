@@ -1,5 +1,5 @@
 import express from 'express';
-import organiser from './organiser.js';
+import organiser from './organisers.js';
 import event from './event.js';
 import login from './login.js';
 import refresh from './refresh.js';
