@@ -10,7 +10,7 @@ const REFRESH_JWT_SECRET = process.env.REFRESH_JWT_SECRET;
 
 const COOKIE_OPTIONS = {
     httpOnly: true,
-    secure: false,
+    secure: process.env.PRODUCTION === true,
     sameSite: 'Lax',
     maxAge: 24 * 60 * 60 * 1000,
 };
@@ -26,7 +26,7 @@ router.post('', async (req, res) => {
         const { email, name, sub } = user;
         let result = await getAuthUser(email); // gets matching record from db
 
-        if(!result) return res.status(403).json({ error: '403 forbidden' });
+        if(!result) return res.status(403).json({ error: '403 forbidden, records missing' });
         
         const userData = {
             name: name,

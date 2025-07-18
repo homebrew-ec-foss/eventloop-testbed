@@ -1,4 +1,4 @@
-import { supabase } from "../../server.js";
+import { supabase } from "../../api/index.js";
 
 async function getRecords(table, fields = {}) {
     try {

@@ -1,4 +1,4 @@
-import { supabase } from "../../server.js";
+import { supabase } from "../../api/index.js";
 
 export async function getAuthUser(email) {
     try {

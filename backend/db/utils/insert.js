@@ -1,4 +1,4 @@
-import { supabase } from "../../server.js";
+import { supabase } from "../../api/index.js";
 
 /**
  * Insert a record into a Supabase table.

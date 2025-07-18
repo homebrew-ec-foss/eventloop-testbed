@@ -29,7 +29,7 @@ export default function Home() {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch(`${process.env.BACKEND_URL}/refresh`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/refresh`, {
           method: "GET",
           credentials: "include", // send cookies
         });
@@ -54,7 +54,7 @@ export default function Home() {
   const handleGoogleLoginSuccess = async (credentialResponse) => {
     try {
       if (credentialResponse.credential) {
-        const res = await fetch(`${process.env.BACKEND_URL}/login`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -102,7 +102,7 @@ export default function Home() {
 
   const handleLogout = async () => {
     try {
-      const res = await fetch(`${process.env.BACKEND_URL}/logout`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/logout`, {
         method: 'POST',
         credentials: 'include',
       });

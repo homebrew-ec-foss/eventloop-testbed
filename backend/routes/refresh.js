@@ -8,7 +8,7 @@ const REFRESH_JWT_SECRET = process.env.REFRESH_JWT_SECRET;
 
 const COOKIE_OPTIONS = {
     httpOnly: true,
-    secure: false,
+    secure: process.env.PRODUCTION === true,
     sameSite: 'Lax',
     maxAge: 24 * 60 * 60 * 1000,
 };
