@@ -1,22 +1,23 @@
-import execute from './execute.js';
+import { supabase } from "../../server.js";
 
 /**
  * Generic 'UPDATE' function
  * @param {string} table - table name
- * @param {string[]} fields - array of column names
- * @param {any[]} values - array of values (must match fields length)
- * @param {any} id - unique non-editable identifier
+ * @param {int} id - id of the record
+ * @param {object} fields - fields to be updated
+ * @returns {Promise<object>} - updated record 
  */
 
-const updateRecord = async (table, fields, values, id) => {
-  if (fields.length !== values.length) {
-    throw new Error("Number of columns do not match number of values provided.");
+async function updateRecord (table, id, fields = []) {
+  if (!table || !id || !fields) throw new Error('Invalid or missing arguments');
+
+  const { data, error } = await supabase.from(table).update([fields]).eq('id', id).select();
+
+  if (error) {
+    console.error(`error while updating ${table}:`, error);
+    throw error;
   }
+  return data;
+}
 
-  const clause = fields.map(field => `${field} = ?`).join(", ");
-  const sql = `UPDATE ${table} SET ${clause} WHERE id = ?`; // intentionally have placeholders in the query, only `execute()` can handle the values
-
-  return execute(sql, [...values, id]);
-};
-
-export default updateRecord;
+export default updateRecord

@@ -1,37 +1,29 @@
-import execute from './execute.js';
+import { supabase } from "../../server.js";
 
-/**
- * Generic 'SELECT' function
- * @param {string} table - table name
- * @param {string[]} fields - array of column names
- * @param {any[]} values - array of values (must match fields length)
- * @param {Array} operators - array of operators (eg. ['AND', 'AND', 'OR])
- */
+async function getRecords(table, fields = {}) {
+    try {
+        const recordQuery = supabase.from(table).select('*');
 
-const selectFromTable = async (table, fields, values, conditions = []) => {
-  if (fields.length !== values.length) {
-    throw new Error("Number of columns do not match number of values provided.");
-  }
+        let filteredQuery = recordQuery;
 
-  let sqlClause = '';
+        if (Object.keys(fields).length >= 1) {
+            for(const [key, value] of Object.entries(fields)) {
+                filteredQuery = filteredQuery.eq(key, value);
+                console.log(filteredQuery);
+            }
+        }
 
-  if (conditions.length > 0) {
-    fields.forEach((field, index) => {
-        const operator = conditions[index]?.operator || ' AND ';
+        const { data, error } = await filteredQuery;
 
-        if (operator === 'OR' && index == 0) sqlClause += `(${field} = ?) `;
-        else sqlClause += `${field} = ? `;
+        if (!data.length >= 1) return { error: 'NA' };
 
-        if (index < (fields.length - 1)) sqlClause += `${operator}`;
-    })
-  }
-  else {
-    sqlClause = `${fields[0]} = ?`;
-  }
+        if (error) throw error;
 
-  const sql = `SELECT * FROM ${table} WHERE ${sqlClause}`;
+        return data;
+    }
+    catch (err) {
+        return console.log('err fetching records: ', err);
+    }
+}
 
-  return execute(sql, values, true);
-};
-
-export default selectFromTable
+export default getRecords

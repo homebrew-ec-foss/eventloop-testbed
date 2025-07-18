@@ -7,13 +7,12 @@ import { supabase } from "../../server.js";
  * @returns {Promise<object>} - The Supabase response.
  */
 export async function insertRecord(table, record) {
-  const { data, error } = await supabase.from(table).insert([record]);
+  const { data, error } = await supabase.from(table).insert([record]).select();
 
   if (error) {
     console.error('Insert error:', error);
-    return error;
+    return false
   }
-  console.log('data', data);
   return data;
 }
 
