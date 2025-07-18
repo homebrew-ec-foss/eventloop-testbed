@@ -25,11 +25,11 @@ export default function Home() {
     }
   }, [alert]);
 
-  // Check if user is logged in by hitting /api/me
+  // Check if user is logged in by hitting /refresh
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch("http://localhost:8000/refresh", {
+        const res = await fetch(`${process.env.BACKEND_URL}/refresh`, {
           method: "GET",
           credentials: "include", // send cookies
         });
@@ -54,7 +54,7 @@ export default function Home() {
   const handleGoogleLoginSuccess = async (credentialResponse) => {
     try {
       if (credentialResponse.credential) {
-        const res = await fetch("http://localhost:8000/login", {
+        const res = await fetch(`${process.env.BACKEND_URL}/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -100,6 +100,35 @@ export default function Home() {
     console.error("Google login failed");
   };
 
+  const handleLogout = async () => {
+    try {
+      const res = await fetch(`${process.env.BACKEND_URL}/logout`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      if (res.ok) {
+        setUser(null);
+        setAlert({
+          visible: true,
+          message: "Logged out.",
+          variant: "success"
+        });
+      }
+      else {
+        throw new Error("Logout failed");
+      }
+    }
+    catch (err) {
+      console.error('logout failed: ', err);
+      setAlert({
+        visible: true,
+        message: "Logout failed. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <main className="flex min-h-screen flex-col p-5 md:p-28 gap-4">
       <NavigationMenu />
@@ -135,9 +164,14 @@ export default function Home() {
         ) : !user ? (
           <GoogleLogin onSuccess={handleGoogleLoginSuccess} onError={handleGoogleLoginFailure} />
         ) : (
-          <p className="text-sm text-muted-foreground">
-            Logged in as <strong>{user.name}</strong> ({user.role})
-          </p>
+          <>
+            <p className="text-sm text-muted-foreground">
+              Logged in as <strong>{user.name}</strong> ({user.role})
+            </p>
+            <button onClick={handleLogout} className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 w-fit text-sm">
+              Logout
+            </button>
+          </>
         )}
       </div>
 

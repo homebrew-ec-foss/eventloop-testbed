@@ -29,8 +29,8 @@ router.post('', async (req, res) => {
         if(!result) return res.status(403).json({ error: '403 forbidden' });
         
         const userData = {
-            name: result.name,
-            email: result.email,
+            name: name,
+            email: email,
             role: result.role,
             sub: sub
         }
