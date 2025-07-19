@@ -1,6 +1,7 @@
-export default function validateOrganiser(req, res, next) {
+export default async function validateUserDetails(req, res, next) {
     const name = req.body?.name?.trim();
     const email = req.body?.email?.trim();
+    const role = req.body?.role?.trim();
 
     if (!name || !email) return res.status(400).json({ error: 'Missing fields' });
 

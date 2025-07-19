@@ -27,4 +27,39 @@ To avoid this, one must wrap the statements into a function and export it using 
 
 - Corrected `emailRegex` as it was earlier allowing illegal email formats.
 
-- TODO: Escape and validate all illegal characters in any form data.
+## Day 5 - 11th July
+- fix: syntactical error and circular reference between `events` and `teams` table.
+
+- Auto-initalisation of db was not working due to some file restructuring. Tested and fixed it.
+
+    - Earlier, unnecessary passing of `db` object was required to perform CRUD operations. The new implementation fixes it by declaring the `db` object directly where it's required (i.e, `utils/execute.js`).
+
+- feat: added a generic update function that updates the record of a table using the `id` identifier
+
+- feat: added support for creating and editing events
+
+## Day 6 - 12th July
+- feat: added a generic select function
+
+- feat: automatic prompting for admin creation if one doesn't already exist
+
+- refactor: used the previous implementation of grouping all non-participants into single table
+
+## Day 8 - 14th July
+- feat: integrate Google OAuth for sign-in
+
+## Day 9 - 15th July
+- tested different deployment options
+
+- read up on the limits of various deployment platforms
+
+## Day 10 - 16th July
+- feat: migrated `dbAuthorisedUsers` table to Supabase
+
+- feat: updated `insert.js` and `getAuthUser.js` to be compatible with Supabase
+
+- feat: updated `organiser` route to be compatible with Supabase
+
+- refactor: purged code that is no longer relevant due to database migration
+
+- purged unused packages from `package.json`
