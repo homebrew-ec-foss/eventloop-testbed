@@ -24,7 +24,7 @@ router.post('', async (req, res) => {
         const user = await verifyToken(credentials); // verify jwt token
 
         const { email, name, sub } = user;
-        let result = await getAuthUser(email); // gets matching record from db
+        let result = await getAuthUser(email, name); // gets matching record from db
 
         if(!result) return res.status(403).json({ error: '403 forbidden, records missing' });
         
@@ -52,7 +52,7 @@ router.post('', async (req, res) => {
             .cookie('refresh_token', refresh_token, { ...COOKIE_OPTIONS, maxAge: 72 * 60 * 60 * 1000, path: '/refresh'})
             .status(200)
             .json({
-                dbAuthUser: {
+                user: {
                     name: result.name,
                     email: result.email,
                     role: result.role,
