@@ -3,6 +3,7 @@ import cors from 'cors';
 import cookieParser from "cookie-parser";
 import { createClient } from '@supabase/supabase-js';
 
+import participant from '../routes/participants.js';
 import organiser from '../routes/organisers.js';
 import event from '../routes/event.js';
 import login from '../routes/login.js';
@@ -26,6 +27,7 @@ app.use('/health', async (req, res) => { return res.status(200).json({ message: 
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/refresh', refresh);
+app.use('/participants', participant)
 app.use('/organisers', organiser);
 app.use('/events', event);
 

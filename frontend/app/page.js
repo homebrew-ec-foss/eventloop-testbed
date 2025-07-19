@@ -65,10 +65,10 @@ export default function Home() {
 
         if (res.ok) {
           const data = await res.json();
-          setUser(data.dbAuthUser);
+          setUser(data.user);
           setAlert({
             visible: true,
-            message: `Successfully logged in as ${data.dbAuthUser.role}`,
+            message: `Successfully logged in as ${data.user.role}`,
             variant: "success",
           });
         } else {

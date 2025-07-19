@@ -9,13 +9,9 @@ import { supabase } from "../../api/index.js";
 export async function deleteRecord(table, id) {
   const { data, error } = await supabase.from(table).delete().eq('id', id);
 
-  console.log(id);
-
   if (error) {
-    console.error('delete error:', error);
     return false
   }
-  console.log('data.js: ', data);
   return data;
 }
 

@@ -9,7 +9,6 @@ async function getRecords(table, fields = {}) {
         if (Object.keys(fields).length >= 1) {
             for(const [key, value] of Object.entries(fields)) {
                 filteredQuery = filteredQuery.eq(key, value);
-                console.log(filteredQuery);
             }
         }
 

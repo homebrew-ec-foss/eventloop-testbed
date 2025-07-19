@@ -33,7 +33,6 @@ router.get('', async (req, res) => {
             .status(200)
             .json({ loggedIn: true, user: payload });
         } catch (err) {
-            console.log(err);
             res.clearCookie('access_token');
             res.clearCookie('refresh_token');
             return res.status(401).json({ error: 'Refresh token expired' });

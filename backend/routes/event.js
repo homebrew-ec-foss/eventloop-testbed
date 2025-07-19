@@ -43,13 +43,9 @@ router.delete('/delete', async (req, res) => {
     const eventID = req.body?.id;
     const event = await deleteEvent(eventID);
 
-    console.log(event);   
-    // console.log(event.success);
-
     if (event) {
         try {
             const removedEvent = await deleteEvent(eventID);
-            console.log(removedEvent);
             return res.status(200).json({ message: `Event '${event['events'][0].name}' deleted.` });
         }
         catch (err) {
